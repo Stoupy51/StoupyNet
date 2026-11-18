@@ -65,3 +65,13 @@ When the samples of a group overlap, every zone of the group carries the same we
 - Kept by [EVA-05](features/evaluation.md#eva-05).
 - Sources: TS. Priority: v1.
 
+## Stored results
+
+### <a name="inv-09"></a>INV-09 A stored result is reused only when nothing it came from changed
+A prepared result is read back only when its source data, the code that computes it and every setting that shapes it, such as the size, the interpolation or the backbone, are the ones it was prepared with.
+- Checking it reads no file content, and costs a small fraction of what the store saves.
+- A dataset the user declares frozen is checked by its group folders alone ([DAT-12](features/data.md#dat-12)), which misses a file rewritten in place.
+- Broken, a run trains on views composited with other settings, or from slides cleaned since, and nothing says so.
+- Kept by [DAT-11](features/data.md#dat-11).
+- Sources: TS, HM, V. Priority: v1.
+

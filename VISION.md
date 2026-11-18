@@ -35,6 +35,11 @@ Every reported score states where it comes from (validation, out of fold, test),
 When an input can be read in several ways, StoupyNet stops with an error that names the possible readings.
 A dataset whose format is recognised loads in one line; one that several loaders could read raises an error listing them, and the user picks the one that fits.
 
+### Fast, everything included
+
+StoupyNet is fast at run time, from reading the data to the last plot and report.
+A safeguard, a check or a cache costs a small fraction of the work it serves, and that cost is measured rather than assumed.
+
 ### Designed before written
 
 Every capability is specified before it is implemented, and finds its place among the existing concepts.

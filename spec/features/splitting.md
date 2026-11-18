@@ -34,6 +34,11 @@ The user can fix the test set in advance, such as the slides of another center o
 - Guarantees [INV-08](../invariants.md#inv-08).
 - Sources: HM, V, L ([Géron, 2022](https://github.com/ageron/handson-ml3), chapter 2). Priority: v1. Key behaviour.
 
+### <a name="spl-08"></a>SPL-08 Splits the user already has
+The user can give the splits they already have, such as the official training and test parts of a benchmark, and StoupyNet uses them as they are.
+- A group found in two of them stops with an error naming it ([INV-02](../invariants.md#inv-02)), unless the user declares that overlap accepted, as reproducing some public benchmarks needs, a choice the run records.
+- Sources: TS, HM. Priority: v1.
+
 ## Cross-validation
 
 ### <a name="spl-01"></a>SPL-01 K folds, or one fold per group

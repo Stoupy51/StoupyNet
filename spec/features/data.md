@@ -44,11 +44,27 @@ The elements of a [bag](../glossary.md#bag) always come in the same order, top t
 - Task: multiple instance learning.
 - Sources: TS. Priority: v1.
 
+### <a name="dat-10"></a>DAT-10 Training draws part of each bag, evaluation reads it whole
+Each read of a bag in training draws a fixed number of its elements, while evaluation and prediction read all of them, since a group's score must cover the group.
+- The draw gives every bag the same shape, so bags batch together, and it shows the model another part of the group at each epoch.
+- A bag smaller than that number is drawn with repetition, so a small group is sampled rather than dropped.
+- The drawn elements keep their reading order ([DAT-06](#dat-06)).
+- Whole bags differ in size, so they are read one at a time, and a larger batch asked for them falls back to one with a notice.
+- Task: multiple instance learning.
+- Sources: TS. Priority: v1.
+
 ## Balancing
 
 ### <a name="dat-07"></a>DAT-07 Classes are balanced by undersampling
 The training side can be balanced by drawing a share of each class, or of each finer subclass, equal by default or weighted by the user, a class too small for its share leaving the rest to the others.
 - A class that falls under a minimum share of its target stops the run with an error giving the share of every class, instead of training on a skewed set.
+- Inside a cross-validation, each fold balances its own training side.
+- Applies to the training side only ([INV-06](../invariants.md#inv-06)).
+- Sources: TS, HM. Priority: v1.
+
+### <a name="dat-09"></a>DAT-09 Each epoch can draw a fresh share of the training side
+Each epoch can keep some training samples every time and draw the others afresh from their pools, such as new negatives for a segmentation, the draws repeating from one run to the next with the same seed.
+- Inside a cross-validation, each fold draws from its own training side.
 - Applies to the training side only ([INV-06](../invariants.md#inv-06)).
 - Sources: TS, HM. Priority: v1.
 
@@ -59,4 +75,18 @@ A dataset read as a stream, whose length is unknown and whose samples cannot be 
 - Splits drawn from the names of the groups alone ([SPL-07](splitting.md#spl-07)) work on a stream as they are.
 - Folds, stratification and balancing need every group in advance, which a stream only learns as it reads.
 - Sources: TS, V. Priority: planned.
+
+## Caching
+
+### <a name="dat-11"></a>DAT-11 What is costly to read is prepared once
+What is costly to read, such as views composited from tiles or features from a frozen backbone, is prepared once and stored, so a run whose store is complete decodes no image.
+- Work shared by the folds of a cross-validation, or by several runs, is prepared once, and an interrupted preparation resumes where it stopped.
+- Guarantees [INV-09](../invariants.md#inv-09).
+- Sources: TS, HM. Priority: v1.
+
+### <a name="dat-12"></a>DAT-12 A dataset declared frozen is checked by its folders alone
+The user can declare a dataset frozen, and checking its stored results then looks at the folders of its groups instead of their files, a choice the run records.
+- On slow storage, such as a network share, the check then costs one lookup per group instead of one per file.
+- A file added, removed or renamed is still detected, and a file rewritten in place is not.
+- Sources: V. Priority: v1.
 
