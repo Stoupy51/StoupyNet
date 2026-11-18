@@ -59,5 +59,5 @@ Pages link to each other wherever one concept relies on another, and each questi
 
 The code is strictly typed, and its names and structure say what it does.
 Nothing is written twice: a capability has one implementation, and a better one replaces it instead of living beside it.
-A test exists to protect something users rely on.
+A test exists to protect something users rely on, as [TESTING.md](TESTING.md) details.
 

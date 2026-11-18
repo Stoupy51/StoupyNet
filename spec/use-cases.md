@@ -4,7 +4,7 @@
 [Spec](README.md) / Use cases
 
 The programs StoupyNet must keep short: each use case states what a user achieves, and the most user code it may take.
-They become the reference examples of the architecture, then tests run in CI.
+They become the reference examples of the architecture, then light tests run on GitHub Actions ([TESTING.md](../TESTING.md#two-tiers)).
 IDs: `UC`.
 
 ## Format
