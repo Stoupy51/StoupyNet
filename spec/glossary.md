@@ -36,6 +36,9 @@ A bag is a kind of [sample](#sample).
 ### Dataset
 The [samples](#sample) available to a [run](#run), with their labels and [metadata](#metadata).
 
+### Decision threshold
+The score above which a prediction counts as positive, turning a probability into a decision.
+
 ### Experiment
 A set of [runs](#run) compared together.
 
@@ -45,6 +48,7 @@ One of the K training and validation divisions of the training [split](#split) i
 ### Group
 The [samples](#sample) that must stay together, such as those of one patient or one slide.
 A [split](#split) never separates them, and a group-level [metric](#metric) scores them as one.
+Groups can nest, such as the slides of one patient, and each kind of group is a [level](#level).
 
 ### Instance
 Two meanings for now, an element of a [bag](#bag) and an object found by instance segmentation, until [Q-03](open-questions.md#q-03) settles them.
@@ -54,6 +58,9 @@ A behaviour that significantly changes what a [run](#run) does, flagged wherever
 
 ### Label
 What a [sample](#sample) should be predicted as: a class, a value, a mask, or several of them.
+
+### Level
+One kind of [group](#group) in a nesting, such as the slide or the patient.
 
 ### Metadata
 What travels with a [sample](#sample) without being fed to the [model](#model), such as its name, its [group](#group) or its position.
@@ -66,6 +73,9 @@ What maps a [sample](#sample) to a prediction for a [task](#task).
 
 ### Out-of-fold score
 The score a [sample](#sample) receives from the [fold](#fold) model that did not train on it.
+
+### Project
+A user's application of StoupyNet: its data, its settings and the [models](#model) it trains, such as the several models of one clinical study.
 
 ### Run
 One execution with a given configuration, and everything it records: [metrics](#metric), plots, checkpoints.

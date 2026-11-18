@@ -23,3 +23,9 @@ The budget of user code of each canonical use case.
 "Instance" names both an element of a [bag](glossary.md#bag) in multiple instance learning and an object found by instance segmentation, such as one nucleus.
 - Blocks: the [glossary](glossary.md#instance), and every item on either topic.
 
+## To settle in the survey
+
+### <a name="q-04"></a>Q-04 What does stratifying mean beyond classification?
+Folds keep the class distribution of the training split ([SPL-03](features/splitting.md#spl-03)), which leaves open what they keep for a regression, a multi-label task or a segmentation.
+- Blocks: [SPL-03](features/splitting.md#spl-03) for every task other than classification.
+

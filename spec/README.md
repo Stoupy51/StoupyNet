@@ -30,28 +30,28 @@ That order is no structure for the code: the architecture draws its boundaries f
 ## Item format
 
 ```markdown
-### <a name="spl-04"></a>SPL-04 Group-aware splits
-Splits and folds are drawn per group, such as a patient or a slide, and stratified by label.
-- The grouping key is the project's choice: a patient rather than one of its slides.
-- Guarantees [INV-02](../invariants.md#inv-02): no group on both sides of a split.
+### <a name="spl-01"></a>SPL-01 Short title
+The need, in one sentence.
+- What that sentence cannot hold.
+- Guarantees [INV-01](../invariants.md#inv-01).
 - Sources: TS, HM. Priority: v1.
 ```
 
 - The heading holds an anchor, the ID and a short title. Other files link to an item with `<file>#<ID in lowercase>`.
 - The first line states the item in one sentence, the one a search lands on.
-- Bullets add what that sentence cannot hold: conditions, examples, links to the items it relies on.
+- Bullets add what that sentence cannot hold: conditions, examples, the errors it raises, what it may cost, and links to the items it relies on. [SPL-01](features/splitting.md#spl-01) holds its impossible fold counts and its memory bound this way.
+- A feature item names the invariants it keeps with `Guarantees`, and an invariant names the items that keep it with `Kept by`.
+- An invariant adds a bullet starting with `Broken,` that says which result turns wrong without it, as in [INV-02](invariants.md#inv-02).
 - The last bullet gives the sources and the priority.
 
-A key behaviour, anything that significantly changes what a run does ([XC-01](cross-cutting.md#xc-01)), puts its statement in an `IMPORTANT` callout and ends its last bullet with `Key behaviour.`:
+A key behaviour, anything that significantly changes what a run does ([XC-01](cross-cutting.md#xc-01)), puts its statement in an `IMPORTANT` callout and ends its last bullet with `Key behaviour.`, as [SPL-02](features/splitting.md#spl-02) does:
 
 ```markdown
-### <a name="trn-07"></a>TRN-07 The folds choose when the final training stops
+### <a name="spl-02"></a>SPL-02 Short title
 > [!IMPORTANT]
-> Without a validation split, the final training stops at the epoch the cross-validation folds point to.
-- Sources: TS. Priority: v1. Key behaviour.
+> The behaviour, in one sentence.
+- Sources: TS, HM, V. Priority: v1. Key behaviour.
 ```
-
-The two items above illustrate the format; the real items live in their files.
 
 ## Tags
 
