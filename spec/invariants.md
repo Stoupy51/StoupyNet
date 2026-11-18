@@ -35,11 +35,19 @@ Undersampling, oversampling and synthetic samples apply to the training side of 
 - Kept by [DAT-07](features/data.md#dat-07).
 - Sources: TS, HM, L. Priority: v1.
 
-### <a name="inv-07"></a>INV-07 A group that tests one model never trains another
-Within a [project](glossary.md#project), a group on the test side of one model is on the training or validation side of none.
-- Broken, a cascade that feeds the output of one model to another is scored on groups one of its models trained on, and two models scored on different groups cannot be compared.
-- Kept by [SPL-06](features/splitting.md#spl-06).
-- Sources: HM. Priority: v1.
+### <a name="inv-07"></a>INV-07 A combination of models is never scored on what its models saw
+A model that combines others, such as a cascade or an extractor followed by a classifier, is never scored on a group that one of its models trained or validated on.
+- Training counts every use of a group, with or without its labels, such as a self-supervised pretraining, unless the user declares that an unlabeled use does not count, a choice the run records.
+- Weights trained outside StoupyNet carry no list of the groups they saw, so the check covers the models StoupyNet trained.
+- Broken, the combination's score is optimistic, since one of its models already saw the groups it is scored on.
+- Kept by [INF-02](features/inference.md#inf-02).
+- Sources: HM, V. Priority: v1.
+
+### <a name="inv-08"></a>INV-08 A group keeps its split as the dataset changes
+With the same seed and proportions, adding or removing groups never moves another group from one split to another, except a group moved by the rule that fills an empty split.
+- Broken, a test group silently becomes a training or validation group, and a model trained after the change has seen what earlier models were tested on.
+- Kept by [SPL-07](features/splitting.md#spl-07).
+- Sources: HM, V. Priority: v1.
 
 ## Decisions
 

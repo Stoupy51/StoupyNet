@@ -74,9 +74,6 @@ What maps a [sample](#sample) to a prediction for a [task](#task).
 ### Out-of-fold score
 The score a [sample](#sample) receives from the [fold](#fold) model that did not train on it.
 
-### Project
-A user's application of StoupyNet: its data, its settings and the [models](#model) it trains, such as the several models of one clinical study.
-
 ### Run
 One execution with a given configuration, and everything it records: [metrics](#metric), plots, checkpoints.
 

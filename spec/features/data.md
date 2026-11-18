@@ -12,7 +12,7 @@ IDs: `DAT`.
 StoupyNet recognises the file format and the structure of a dataset it is pointed at, and loads it with no further code.
 - Structure matters as much as format: a folder of images can hold one subfolder per class, pairs of images and masks, or the [tiles](../glossary.md#tile) of one slide.
 - The aim is every common format and structure; the inventory and the survey of other frameworks draw up the list.
-- A project whose folders follow a naming of its own, such as `slide_*` for its groups, states that naming instead of renaming its folders.
+- Folders that follow a naming of their own, such as `slide_*` for groups, are read once the user states that naming, with no renaming.
 - Sources: TS, V. Priority: v1.
 
 ### <a name="dat-02"></a>DAT-02 An ambiguous dataset stops with its possible readings
@@ -29,7 +29,7 @@ The [metadata](../glossary.md#metadata) of a sample, such as its name, its [grou
 
 ### <a name="dat-04"></a>DAT-04 A sample's label and metadata are read without its content
 A dataset gives the [label](../glossary.md#label) and the metadata of a sample without reading its content, so stratifying, checking folds or picking samples to explain never decodes the images.
-- A dataset written by a project that cannot do so falls back to reading its samples, and a check too costly that way is skipped with a notice.
+- A dataset the user wrote that cannot do so falls back to reading its samples, and a check too costly that way is skipped with a notice.
 - Sources: TS. Priority: v1.
 
 ### <a name="dat-05"></a>DAT-05 A dataset from another library works as it is
@@ -47,8 +47,16 @@ The elements of a [bag](../glossary.md#bag) always come in the same order, top t
 ## Balancing
 
 ### <a name="dat-07"></a>DAT-07 Classes are balanced by undersampling
-The training side can be balanced by drawing a share of each class, or of each finer subclass, equal by default or weighted by the project, a class too small for its share leaving the rest to the others.
+The training side can be balanced by drawing a share of each class, or of each finer subclass, equal by default or weighted by the user, a class too small for its share leaving the rest to the others.
 - A class that falls under a minimum share of its target stops the run with an error giving the share of every class, instead of training on a skewed set.
 - Applies to the training side only ([INV-06](../invariants.md#inv-06)).
 - Sources: TS, HM. Priority: v1.
+
+## Streams
+
+### <a name="dat-08"></a>DAT-08 A dataset of unknown length
+A dataset read as a stream, whose length is unknown and whose samples cannot be reached by position, such as one streamed from the network, trains and evaluates like any other.
+- Splits drawn from the names of the groups alone ([SPL-07](splitting.md#spl-07)) work on a stream as they are.
+- Folds, stratification and balancing need every group in advance, which a stream only learns as it reads.
+- Sources: TS, V. Priority: planned.
 
